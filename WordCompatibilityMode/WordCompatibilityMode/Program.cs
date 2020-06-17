@@ -12,11 +12,14 @@ namespace WordCompatibilityMode
             string path = string.Empty;
             Console.Write("Set directory path (or press ENTER to set current dir):");
             path = Console.ReadLine();
+            Console.WriteLine("Scanning documents...");
+
             if (string.IsNullOrWhiteSpace(path))
                 path = @".";
             DirectoryInfo di = new DirectoryInfo(path: path);
             FileInfo[] files = di.GetFilesByExtensions(".docx", ".doc").ToArray();
 
+            Console.WriteLine($"Found {files?.Length} documents (.docx, .doc).");
             Application ap = new Application();
             {
                 foreach (FileInfo f in files)
@@ -34,7 +37,7 @@ namespace WordCompatibilityMode
                     }
                 }
             }
-            Console.WriteLine("Completed.");
+            Console.WriteLine("Completed. Press ENTER to close.");
             Console.ReadLine();
         }
     }
